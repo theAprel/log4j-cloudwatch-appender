@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static io.sensefly.logging.log4j.CloudWatchDebugger.debug;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.Collectors.toList;
+import org.apache.logging.log4j.Level;
 
 @Plugin(name = "CloudWatchAppender", category = "Core", elementType = Appender.ELEMENT_TYPE, printObject = true)
 public class CloudWatchAppender extends AbstractAppender {
@@ -85,7 +86,8 @@ public class CloudWatchAppender extends AbstractAppender {
   @SuppressWarnings("squid:S899") // Return values should not be ignored when they contain the operation status code
   public void append(LogEvent event) {
     if(appenderInitialised.get()) {
-      logEventsQueue.offer(event);
+        if(event != null && event.getLevel().isLessSpecificThan(Level.INFO))
+            logEventsQueue.offer(event);
     } else {
       debug("Cannot append as appender not yet initialised");
     }
