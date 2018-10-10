@@ -86,8 +86,9 @@ public class CloudWatchAppender extends AbstractAppender {
   @SuppressWarnings("squid:S899") // Return values should not be ignored when they contain the operation status code
   public void append(LogEvent event) {
     if(appenderInitialised.get()) {
-        if(event != null && event.getLevel().isLessSpecificThan(Level.INFO))
-            logEventsQueue.offer(event);
+//        if(event != null && event.getLevel().isLessSpecificThan(Level.INFO))
+//            logEventsQueue.offer(event);
+        System.out.println("GOTTEM");
     } else {
       debug("Cannot append as appender not yet initialised");
     }
