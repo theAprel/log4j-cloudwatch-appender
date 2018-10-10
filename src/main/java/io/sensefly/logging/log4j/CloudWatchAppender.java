@@ -87,7 +87,7 @@ public class CloudWatchAppender extends AbstractAppender {
   public void append(LogEvent event) {
     if(appenderInitialised.get()) {
 //        if(event != null && event.getLevel().isLessSpecificThan(Level.INFO))
-//            logEventsQueue.offer(event);
+            logEventsQueue.offer(event);
         System.out.println("GOTTEM");
     } else {
       debug("Cannot append as appender not yet initialised");
